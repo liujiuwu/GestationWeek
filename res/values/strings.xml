@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello">Hello World, GestationWeek!</string>
+	<string name="app_name">美孕宝</string>
+	<string name="menu_item_config">设置</string>
+	<string name="menu_item_help">帮助</string>
+	<string name="menu_item_about">关于</string>
+	<string name="menu_item_exit">退出</string>
+	<string name="tab_1_name">孕宝</string>
+	<string name="tab_2_name">变化</string>
+	<string name="tab_3_name">孕记</string>
+	<string name="tab_4_name">知识</string>
+	<string name="btn_up_month">上一月</string>
+	<string name="btn_down_month">下一月</string>
+	<string name="btn_up_week">上一周</string>
+	<string name="btn_down_week">下一周</string>
+	<string name="view_week_title">第%s周孕妈妈及胎宝宝变化</string>
+	<string name="view_month_title">第%s个月孕妈妈及胎宝宝变化</string>
+	<string name="now_week">第%s周</string>
+	<string name="now_month">第%s个月</string>
+	<string name="week_descn">%s周</string>
+	<string name="day_descn">+%s天</string>
+	<string name="days_descn">(%s天)</string>
+	<string name="diary_count">当前共%s篇日志</string>
+	<string name="diary_title">标题：</string>
+	<string name="diary_content">内容：</string>
+	<string name="diary_save_btn">保存</string>
+	<string name="diary_cancel_btn">取消</string>
+	<string name="ok_btn">确定</string>
+	<string name="cancel_btn">取消</string>
+	<string name="mama_name">孕妈妈姓名：</string>
+	<string name="mama_mc">未次月经第一天：</string>
+	<string name="mama_calcType">计算方式：</string>
+	<string name="baby_name">宝宝姓名：</string>
+</resources>

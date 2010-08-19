@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent">
+	<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" android:padding="5dip">
+		<TextView android:text="@string/diary_title" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<EditText android:text="" android:id="@+id/et_diary_title" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+		<TextView android:text="@string/diary_content" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<EditText android:text="" android:id="@+id/et_diary_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="top" android:layout_marginLeft="5dip" android:layout_marginTop="5dip" android:layout_weight="1" android:scrollbars="vertical"></EditText>
+	</LinearLayout>
+	<LinearLayout style="@android:style/ButtonBar" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="right">
+		<Button android:text="@string/diary_save_btn" android:id="@+id/btn_save_diary" android:layout_width="wrap_content" android:width="80dip" android:layout_height="wrap_content"></Button>
+		<Button android:text="@string/diary_cancel_btn" android:id="@+id/btn_diary_cancel" android:layout_width="wrap_content" android:width="80dip" android:layout_height="wrap_content"></Button>
+	</LinearLayout>
+</LinearLayout>

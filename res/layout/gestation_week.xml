@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent">
+	<LinearLayout android:id="@+id/tab1_content" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+		<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+			<TableLayout android:id="@+id/TableLayout01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="10px">
+				<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<TextView android:text="今日：" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+					<TextView android:id="@+id/tv_now" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+				</TableRow>
+				<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<TextView android:text="孕妈妈：" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+					<TextView android:id="@+id/tv_mama_name" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+				</TableRow>
+				<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<TextView android:text="已怀孕：" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+					<TextView android:id="@+id/tv_mama_week" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+				</TableRow>
+				<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<TextView android:text="孕周：" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+					<TextView android:id="@+id/tv_mama_now_week" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+				</TableRow>
+				<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<TextView android:text="孕月：" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+					<TextView android:id="@+id/tv_mama_now_month" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+				</TableRow>
+				<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<TextView android:text="预产日期：" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+					<TextView android:id="@+id/tv_mama_ycq" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+				</TableRow>
+				<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<TextView android:text="距预产日期还有：" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+					<TextView android:id="@+id/tv_mama_djs" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" />
+				</TableRow>
+			</TableLayout>
+		</LinearLayout>
+		<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+		</LinearLayout>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/tab2_content" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+		<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+			<ImageView android:src="@drawable/arrow" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_margin="5px"></ImageView>
+			<TextView android:id="@+id/tv_descn_title" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="20px" android:textStyle="bold" />
+		</LinearLayout>
+		<ScrollView android:layout_weight="1.0" android:layout_width="fill_parent" android:layout_height="fill_parent">
+			<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+				<TextView android:id="@+id/tv_descn_content" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textSize="15px" android:lineSpacingExtra="3px" android:padding="5px" />
+			</LinearLayout>
+		</ScrollView>
+		<LinearLayout style="@android:style/ButtonBar" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="right">
+			<RadioGroup android:id="@+id/RadioGroup01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+				<RadioButton android:text="周变化" android:id="@+id/rb_view_week" android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+				<RadioButton android:text="月变化" android:id="@+id/rb_view_month" android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+			</RadioGroup>
+			<Button android:text="上一周" android:id="@+id/btn_view_up" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+			<Button android:text="下一周" android:id="@+id/btn_view_down" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+		</LinearLayout>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/tab3_content" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+		<ListView android:id="@+id/ls_diaries" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+		</ListView>
+		<LinearLayout style="@android:style/ButtonBar" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="right">
+			<TextView android:id="@+id/tv_diary_count" android:layout_width="fill_parent" android:layout_height="fill_parent" android:gravity="center_vertical" android:paddingRight="5px"/>
+			<Button android:text="清除所有日志" android:id="@+id/btn_clean_diary" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+			<Button android:text="写新日志" android:id="@+id/btn_new_diary" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+		</LinearLayout>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/tab4_content" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+	</LinearLayout>
+</FrameLayout>

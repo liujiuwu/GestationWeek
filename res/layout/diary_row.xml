@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/row" android:layout_width="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="fill_parent" android:padding="5px">
+	<TextView android:id="@+id/diary_title" android:textColor="#FFFFFF" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxWidth="200dip" android:layout_marginTop="10dip" />
+	<TextView android:id="@+id/diary_date" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_marginLeft="10dip" android:layout_marginTop="10dip" />
+</RelativeLayout>
