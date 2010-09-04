@@ -1,7 +1,8 @@
 package com.pure.gestationweek;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
 
 import android.app.AlertDialog;
 import android.app.TabActivity;
@@ -9,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +34,7 @@ import android.widget.TabHost.OnTabChangeListener;
 import com.pure.gestationweek.util.DiaryListViewAdapter;
 import com.pure.gestationweek.util.GestationDiaryDbAdapter;
 import com.pure.gestationweek.util.LogUtil;
+import com.pure.gestationweek.util.Utils;
 
 public class GestationWeek extends TabActivity {
 	public final static String GESTATION_WEEK_CONFIG = "gestation_week_config";
@@ -42,7 +45,6 @@ public class GestationWeek extends TabActivity {
 	private static final int CONFIG_CODE = 1;
 	private static final int CREATE_DIARY_CODE = 2;
 	private static final int EDIT_DIARY_CODE = 3;
-	private static final int ONE_DAY = 86400000;
 	private final static String TAG = "GestationWeek";
 	private static final int MENU_CONFIG = Menu.FIRST;
 	private static final int MENU_HELP = MENU_CONFIG + 1;
@@ -97,8 +99,9 @@ public class GestationWeek extends TabActivity {
 	private void init() {
 		LogUtil.show(TAG, "->init gestationweek", Log.DEBUG);
 		mTabHost = getTabHost();
+		Resources res = getResources();
 		LayoutInflater.from(this).inflate(R.layout.gestation_week, mTabHost.getTabContentView(), true);
-		mTabHost.addTab(mTabHost.newTabSpec(TAB_1).setIndicator(getString(R.string.tab_1_name)).setContent(R.id.tab1_content));
+		mTabHost.addTab(mTabHost.newTabSpec(TAB_1).setIndicator(getString(R.string.tab_1_name), res.getDrawable(R.drawable.heat)).setContent(R.id.tab1_content));
 		mTabHost.addTab(mTabHost.newTabSpec(TAB_2).setIndicator(getString(R.string.tab_2_name)).setContent(R.id.tab2_content));
 		mTabHost.addTab(mTabHost.newTabSpec(TAB_3).setIndicator(getString(R.string.tab_3_name)).setContent(R.id.tab3_content));
 		mTabHost.addTab(mTabHost.newTabSpec(TAB_4).setIndicator(getString(R.string.tab_4_name)).setContent(R.id.tab4_content));
@@ -134,7 +137,7 @@ public class GestationWeek extends TabActivity {
 		btn_clean_diary = (Button) findViewById(R.id.btn_clean_diary);
 
 		Calendar now = Calendar.getInstance();
-		String today = String.format("%s %s", new SimpleDateFormat("yyyy-MM-dd").format(now.getTime()), getResources().getStringArray(R.array.weeks)[now.get(Calendar.DAY_OF_WEEK) - 1]);
+		String today = String.format("%s %s", Utils.formatDate(new Date(), getString(R.string.date_format)), getResources().getStringArray(R.array.weeks)[now.get(Calendar.DAY_OF_WEEK) - 1]);
 		tv_now.setText(today);
 		tv_mama_name.setText(gestationWeekConfig.getString(GestationWeekConfig.MAMA_NAME, ""));
 
@@ -275,11 +278,12 @@ public class GestationWeek extends TabActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		calcGestationWeek();
+		/*calcGestationWeek();
+
 		if (requestCode == CREATE_DIARY_CODE || requestCode == EDIT_DIARY_CODE) {
 			mTabHost.setCurrentTabByTag(TAB_3);
 			renderListView();
-		}
+		}*/
 	}
 
 	@Override
@@ -324,64 +328,18 @@ public class GestationWeek extends TabActivity {
 	private void calcGestationWeek() {
 		int calcType = gestationWeekConfig.getInt(GestationWeekConfig.CALC_TYPE, 0);
 		long mcLong = gestationWeekConfig.getLong(GestationWeekConfig.MAMA_MC, System.currentTimeMillis());
-		Calendar mc = Calendar.getInstance();
-		mc.setTimeInMillis(mcLong);
 
-		Calendar now = Calendar.getInstance();
-		int days = distanceDay(mc, now) + 1;
-		week = days / 7;
-		int day = days % 7;
-		tv_mama_week.setText(getWeekDayDescn(days));
-		if (day > 0) {
-			week += 1;
-		}
+		Map<String, Integer> gestationWeek = Utils.getGestationWeek(calcType, mcLong);
+		tv_mama_week.setText(getWeekDayDescn(gestationWeek.get(Utils.GESTATION_WEEK_DAYS)));
+
+		week = gestationWeek.get(Utils.GESTATION_WEEK_WEEK);
+		month = gestationWeek.get(Utils.GESTATION_WEEK_MONTH);
 		tv_mama_now_week.setText(getString(R.string.now_week, week));
-
-		month = inMonth(mc, now);
 		tv_mama_now_month.setText(getString(R.string.now_month, month));
-
-		if (calcType == 0) {
-			mc.add(Calendar.DAY_OF_YEAR, 280);
-		} else {
-			mc.add(Calendar.MONTH, 9);
-			mc.add(Calendar.DAY_OF_MONTH, 7);
-		}
-		tv_mama_ycq.setText(new SimpleDateFormat("yyyy-MM-dd").format(mc.getTime()));
-
-		days = distanceDay(now, mc);
-		tv_mama_djs.setText(getWeekDayDescn(days));
+		tv_mama_ycq.setText(Utils.formatDate(new Date(gestationWeek.get(Utils.GESTATION_WEEK_YCQ) * 1000L), getString(R.string.date_format)));
+		tv_mama_djs.setText(getWeekDayDescn(gestationWeek.get(Utils.GESTATION_WEEK_DJS_DAYS)));
 		viewWeek = week;
 		viewMonth = month;
-	}
-
-	private int distanceDay(Calendar st, Calendar et) {
-		st.clear(Calendar.HOUR_OF_DAY);
-		st.clear(Calendar.MINUTE);
-		st.clear(Calendar.SECOND);
-		st.clear(Calendar.MILLISECOND);
-
-		et.clear(Calendar.HOUR_OF_DAY);
-		et.clear(Calendar.MINUTE);
-		et.clear(Calendar.SECOND);
-		et.clear(Calendar.MILLISECOND);
-		return (int) ((et.getTime().getTime() - st.getTime().getTime()) / ONE_DAY);
-	}
-
-	private int distanceMonth(Calendar st, Calendar et) {
-		st.clear(Calendar.HOUR_OF_DAY);
-		st.clear(Calendar.MINUTE);
-		st.clear(Calendar.SECOND);
-		st.clear(Calendar.MILLISECOND);
-
-		et.clear(Calendar.HOUR_OF_DAY);
-		et.clear(Calendar.MINUTE);
-		et.clear(Calendar.SECOND);
-		et.clear(Calendar.MILLISECOND);
-		return (et.get(Calendar.YEAR) - st.get(Calendar.YEAR)) * 12 + (et.get(Calendar.MONTH) - st.get(Calendar.MONTH));
-	}
-
-	private int inMonth(Calendar mc, Calendar now) {
-		return distanceMonth(mc, now) + 1;
 	}
 
 	private String getWeekDayDescn(int days) {

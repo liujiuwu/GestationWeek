@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 	<string name="hello">Hello World, GestationWeek!</string>
 	<string name="app_name">美孕宝</string>
+	<string name="date_format">yyyy年MM月dd日</string>
 	<string name="menu_item_config">设置</string>
 	<string name="menu_item_help">帮助</string>
 	<string name="menu_item_about">关于</string>
@@ -32,4 +33,7 @@
 	<string name="mama_mc">未次月经第一天：</string>
 	<string name="mama_calcType">计算方式：</string>
 	<string name="baby_name">宝宝姓名：</string>
+
+	<string name="widget_name">美孕宝</string>
+	<string name="gestation_week_tip">你的预产期在%s左右，恭喜你已怀孕%s，现处于%s，孕%s，剩余%s</string>
 </resources>
