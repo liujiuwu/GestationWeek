@@ -21,14 +21,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TabHost.OnTabChangeListener;
 
 import com.pure.gestationweek.util.DiaryListViewAdapter;
@@ -51,15 +48,12 @@ public class GestationWeek extends TabActivity {
 	private static final int MENU_ABOUT = MENU_HELP + 1;
 	private static final int MENU_EXIT = MENU_ABOUT + 1;
 	private SharedPreferences gestationWeekConfig;
-	private TextView tv_mama_name;
 	private TextView tv_mama_week;
 	private TextView tv_now;
 	private TextView tv_mama_now_week;
 	private TextView tv_mama_now_month;
 	private TextView tv_mama_ycq;
 	private TextView tv_mama_djs;
-	private RadioButton rb_view_week;
-	private RadioButton rb_view_month;
 	private Button btn_view_up;
 	private Button btn_view_down;
 	private Button btn_new_diary;
@@ -71,10 +65,8 @@ public class GestationWeek extends TabActivity {
 	private ListView ls_diaries;
 
 	private TabHost mTabHost;
-	private int viewType = 0;
 	private int week = 1;
 	private int month = 1;
-	private int viewWeek = 1;
 	private int viewMonth = 1;
 	private Context context;
 
@@ -89,10 +81,6 @@ public class GestationWeek extends TabActivity {
 		dbHelper.open();
 
 		gestationWeekConfig = this.getApplicationContext().getSharedPreferences(GESTATION_WEEK_CONFIG, 0);
-		if (gestationWeekConfig == null || "".equals(gestationWeekConfig.getString(GestationWeekConfig.MAMA_NAME, ""))) {
-			gotoGestationWeekConfigActivity();
-			return;
-		}
 		init();
 	}
 
@@ -111,7 +99,7 @@ public class GestationWeek extends TabActivity {
 				if (TAB_1.equals(tabTag)) {
 					calcGestationWeek();
 				} else if (TAB_2.equals(tabTag)) {
-					tv_descn_content.setText(getResources().getStringArray(R.array.week_descns)[viewWeek - 1]);
+					tv_descn_content.setText(getResources().getStringArray(R.array.month_descns)[viewMonth - 1]);
 				} else if (TAB_3.equals(tabTag)) {
 					renderListView();
 				}
@@ -119,7 +107,6 @@ public class GestationWeek extends TabActivity {
 		});
 
 		tv_now = (TextView) findViewById(R.id.tv_now);
-		tv_mama_name = (TextView) findViewById(R.id.tv_mama_name);
 		tv_mama_week = (TextView) findViewById(R.id.tv_mama_week);
 		tv_mama_now_week = (TextView) findViewById(R.id.tv_mama_now_week);
 		tv_mama_now_month = (TextView) findViewById(R.id.tv_mama_now_month);
@@ -131,84 +118,36 @@ public class GestationWeek extends TabActivity {
 		tv_diary_count = (TextView) findViewById(R.id.tv_diary_count);
 		btn_view_up = (Button) findViewById(R.id.btn_view_up);
 		btn_view_down = (Button) findViewById(R.id.btn_view_down);
-		rb_view_week = (RadioButton) findViewById(R.id.rb_view_week);
-		rb_view_month = (RadioButton) findViewById(R.id.rb_view_month);
 		btn_new_diary = (Button) findViewById(R.id.btn_new_diary);
 		btn_clean_diary = (Button) findViewById(R.id.btn_clean_diary);
 
 		Calendar now = Calendar.getInstance();
 		String today = String.format("%s %s", Utils.formatDate(new Date(), getString(R.string.date_format)), getResources().getStringArray(R.array.weeks)[now.get(Calendar.DAY_OF_WEEK) - 1]);
 		tv_now.setText(today);
-		tv_mama_name.setText(gestationWeekConfig.getString(GestationWeekConfig.MAMA_NAME, ""));
 
 		calcGestationWeek();
 
 		btn_view_up.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (rb_view_week.isChecked()) {
-					if (viewWeek > 1) {
-						viewWeek--;
-					} else {
-						viewWeek = 40;
-					}
-					setViewDescn(viewWeek);
+				if (viewMonth > 1) {
+					viewMonth--;
 				} else {
-					if (viewMonth > 1) {
-						viewMonth--;
-					} else {
-						viewMonth = 10;
-					}
-					setViewDescn(viewMonth);
+					viewMonth = 10;
 				}
+				setViewDescn(viewMonth);
 			}
 		});
 
 		btn_view_down.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (rb_view_week.isChecked()) {
-					if (viewWeek < 40) {
-						viewWeek++;
-					} else {
-						viewWeek = 1;
-					}
-					setViewDescn(viewWeek);
+				if (viewMonth < 10) {
+					viewMonth++;
 				} else {
-					if (viewMonth < 10) {
-						viewMonth++;
-					} else {
-						viewMonth = 1;
-					}
-					setViewDescn(viewMonth);
+					viewMonth = 1;
 				}
-			}
-		});
-
-		rb_view_week.setChecked(true);
-		rb_view_week.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (isChecked) {
-					viewType = 0;
-					viewWeek = week;
-					btn_view_up.setText(getString(R.string.btn_up_week));
-					btn_view_down.setText(getString(R.string.btn_down_week));
-					setViewDescn(viewWeek);
-				}
-			}
-		});
-
-		rb_view_month.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (isChecked) {
-					viewType = 1;
-					viewMonth = month;
-					btn_view_up.setText(getString(R.string.btn_up_month));
-					btn_view_down.setText(getString(R.string.btn_down_month));
-					setViewDescn(viewMonth);
-				}
+				setViewDescn(viewMonth);
 			}
 		});
 
@@ -250,7 +189,7 @@ public class GestationWeek extends TabActivity {
 		ls_diaries.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, final long id) {
-				new AlertDialog.Builder(context).setTitle("提示").setMessage("确定该日志吗?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				new AlertDialog.Builder(context).setTitle("提示").setMessage("确定删除该日志吗?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						dbHelper.deleteDiary(id);
 						renderListView();
@@ -262,28 +201,23 @@ public class GestationWeek extends TabActivity {
 				return true;
 			}
 		});
-		setViewDescn(viewWeek);
+		setViewDescn(viewMonth);
 	}
 
 	private void setViewDescn(int view) {
-		if (viewType == 0) {
-			tv_descn_title.setText(getString(R.string.view_week_title, view));
-			tv_descn_content.setText(getResources().getStringArray(R.array.week_descns)[view - 1]);
-		} else {
-			tv_descn_title.setText(getString(R.string.view_month_title, view));
-			tv_descn_content.setText(getResources().getStringArray(R.array.month_descns)[view - 1]);
-		}
+		tv_descn_title.setText(getString(R.string.view_month_title, view));
+		tv_descn_content.setText(getResources().getStringArray(R.array.month_descns)[view - 1]);
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		/*calcGestationWeek();
-
+		calcGestationWeek();
 		if (requestCode == CREATE_DIARY_CODE || requestCode == EDIT_DIARY_CODE) {
 			mTabHost.setCurrentTabByTag(TAB_3);
 			renderListView();
-		}*/
+		}
+
 	}
 
 	@Override
@@ -338,7 +272,6 @@ public class GestationWeek extends TabActivity {
 		tv_mama_now_month.setText(getString(R.string.now_month, month));
 		tv_mama_ycq.setText(Utils.formatDate(new Date(gestationWeek.get(Utils.GESTATION_WEEK_YCQ) * 1000L), getString(R.string.date_format)));
 		tv_mama_djs.setText(getWeekDayDescn(gestationWeek.get(Utils.GESTATION_WEEK_DJS_DAYS)));
-		viewWeek = week;
 		viewMonth = month;
 	}
 

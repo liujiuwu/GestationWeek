@@ -26,7 +26,6 @@ public class GestationWeekWidget extends AppWidgetProvider {
 
 	public static final String EXTRA_TIMES = "times";
 
-	public static final String PREFS_NAME = "Protips";
 	public static final String PREFS_TIP_NUMBER = "widget_tip";
 
 	private int mIconRes = R.drawable.droidman_open;
@@ -62,8 +61,6 @@ public class GestationWeekWidget extends AppWidgetProvider {
 		setup(context);
 
 		if (intent.getAction().equals(ACTION_NEXT_TIP)) {
-			SharedPreferences.Editor pref = context.getSharedPreferences(PREFS_NAME, 0).edit();
-			pref.commit();
 			refresh();
 		} else if (intent.getAction().equals(ACTION_POKE)) {
 			blink(intent.getIntExtra(EXTRA_TIMES, 1));

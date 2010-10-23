@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.DatePicker.OnDateChangedListener;
@@ -28,8 +27,6 @@ public class GestationWeekConfig extends Activity {
 	private SharedPreferences gestationWeekConfig;
 	private Button btn_ok;
 	private Button btn_cancel;
-	private EditText et_mama_name;
-	private EditText et_baby_name;
 	private DatePicker dp_mama_mc;
 	private Spinner sp_calc_type;
 	private int selected_calc_type = 0;
@@ -60,9 +57,6 @@ public class GestationWeekConfig extends Activity {
 		});
 		sp_calc_type.setSelection(gestationWeekConfig.getInt(CALC_TYPE, selected_calc_type));
 
-		et_mama_name = (EditText) findViewById(R.id.et_mama_name);
-		et_mama_name.setText(gestationWeekConfig.getString(MAMA_NAME, ""));
-
 		long mamaMcLong = gestationWeekConfig.getLong(MAMA_MC, System.currentTimeMillis());
 		Calendar mamaMc = Calendar.getInstance();
 		mamaMc.clear();
@@ -74,9 +68,6 @@ public class GestationWeekConfig extends Activity {
 			public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 			}
 		});
-
-		et_baby_name = (EditText) findViewById(R.id.et_baby_name);
-		et_baby_name.setText(gestationWeekConfig.getString(BABY_NAME, ""));
 
 		btn_ok = (Button) findViewById(R.id.btn_ok);
 		btn_ok.setOnClickListener(btnOkListener);
@@ -98,15 +89,13 @@ public class GestationWeekConfig extends Activity {
 	private OnClickListener btnOkListener = new OnClickListener() {
 		@Override
 		public void onClick(View view) {
-			String mamaName = et_mama_name.getText().toString();
-			String babyName = et_baby_name.getText().toString();
 			Calendar mamaMc = Calendar.getInstance();
 			mamaMc.clear();
 			mamaMc.set(Calendar.YEAR, dp_mama_mc.getYear());
 			mamaMc.set(Calendar.MONTH, dp_mama_mc.getMonth());
 			mamaMc.set(Calendar.DAY_OF_MONTH, dp_mama_mc.getDayOfMonth());
 			Log.i(TAG, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(mamaMc.getTime()));
-			gestationWeekConfig.edit().putString(MAMA_NAME, mamaName).putLong(MAMA_MC, mamaMc.getTime().getTime()).putInt(CALC_TYPE, selected_calc_type).putString(BABY_NAME, babyName).commit();
+			gestationWeekConfig.edit().putLong(MAMA_MC, mamaMc.getTime().getTime()).putInt(CALC_TYPE, selected_calc_type).commit();
 			gotoGestationWeek();
 		}
 	};
