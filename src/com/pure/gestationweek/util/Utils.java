@@ -58,7 +58,7 @@ public abstract class Utils {
 		mc.setTimeInMillis(mcLong);
 
 		Calendar now = Calendar.getInstance();
-		int days = Utils.distanceDay(mc, now) + 1;
+		int days = Utils.distanceDay(mc, now);
 		int week = days / 7;
 		int day = days % 7;
 
@@ -68,7 +68,29 @@ public abstract class Utils {
 		}
 		gestationWeek.put(GESTATION_WEEK_WEEK, week);
 
-		int month = Utils.inMonth(mc, now);
+		int month = 1;// Utils.inMonth(mc, now);
+		if (week >= 1 && week <= 4) {
+			month = 1;
+		} else if (week >= 5 && week <= 8) {
+			month = 2;
+		} else if (week >= 9 && week <= 12) {
+			month = 3;
+		} else if (week >= 13 && week <= 16) {
+			month = 4;
+		} else if (week >= 17 && week <= 20) {
+			month = 5;
+		} else if (week >= 21 && week <= 24) {
+			month = 6;
+		} else if (week >= 25 && week <= 28) {
+			month = 7;
+		} else if (week >= 29 && week <= 32) {
+			month = 8;
+		} else if (week >= 33 && week <= 36) {
+			month = 9;
+		} else if (week >= 37 && week <= 40) {
+			month = 10;
+		}
+
 		gestationWeek.put(GESTATION_WEEK_MONTH, month);
 
 		if (calcType == 0) {
@@ -79,7 +101,7 @@ public abstract class Utils {
 		}
 		gestationWeek.put(GESTATION_WEEK_YCQ, (int) (mc.getTime().getTime() / 1000L));
 
-		days = Utils.distanceDay(now, mc);
+		days = Utils.distanceDay(now, mc) + 1;
 		gestationWeek.put(GESTATION_WEEK_DJS_DAYS, days);
 		return gestationWeek;
 	}

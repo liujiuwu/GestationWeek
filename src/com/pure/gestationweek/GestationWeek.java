@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -58,6 +59,10 @@ public class GestationWeek extends TabActivity {
 	private Button btn_view_down;
 	private Button btn_new_diary;
 	private Button btn_clean_diary;
+	private ImageView img_w1;
+	private ImageView img_w2;
+	private ImageView img_w3;
+	private ImageView img_w4;
 
 	private TextView tv_descn_title;
 	private TextView tv_descn_content;
@@ -207,6 +212,74 @@ public class GestationWeek extends TabActivity {
 	private void setViewDescn(int view) {
 		tv_descn_title.setText(getString(R.string.view_month_title, view));
 		tv_descn_content.setText(getResources().getStringArray(R.array.month_descns)[view - 1]);
+
+		img_w1 = (ImageView) findViewById(R.id.img_w1);
+		img_w2 = (ImageView) findViewById(R.id.img_w2);
+		img_w3 = (ImageView) findViewById(R.id.img_w3);
+		img_w4 = (ImageView) findViewById(R.id.img_w4);
+
+		switch (view) {
+		case 1:
+			img_w1.setImageResource(R.drawable.m1w1);
+			img_w2.setImageResource(R.drawable.m1w2);
+			img_w3.setImageResource(R.drawable.m1w3);
+			img_w4.setImageResource(R.drawable.m1w4);
+			break;
+		case 2:
+			img_w1.setImageResource(R.drawable.m2w5);
+			img_w2.setImageResource(R.drawable.m2w6);
+			img_w3.setImageResource(R.drawable.m2w7);
+			img_w4.setImageResource(R.drawable.m2w8);
+			break;
+		case 3:
+			img_w1.setImageResource(R.drawable.m3w9);
+			img_w2.setImageResource(R.drawable.m3w10);
+			img_w3.setImageResource(R.drawable.m3w11);
+			img_w4.setImageResource(R.drawable.m3w12);
+			break;
+		case 4:
+			img_w1.setImageResource(R.drawable.m4w13);
+			img_w2.setImageResource(R.drawable.m4w14);
+			img_w3.setImageResource(R.drawable.m4w15);
+			img_w4.setImageResource(R.drawable.m4w16);
+			break;
+		case 5:
+			img_w1.setImageResource(R.drawable.m5w17);
+			img_w2.setImageResource(R.drawable.m5w18);
+			img_w3.setImageResource(R.drawable.m5w19);
+			img_w4.setImageResource(R.drawable.m5w20);
+			break;
+		case 6:
+			img_w1.setImageResource(R.drawable.m6w21);
+			img_w2.setImageResource(R.drawable.m6w22);
+			img_w3.setImageResource(R.drawable.m6w23);
+			img_w4.setImageResource(R.drawable.m6w24);
+			break;
+		case 7:
+			img_w1.setImageResource(R.drawable.m7w25);
+			img_w2.setImageResource(R.drawable.m7w26);
+			img_w3.setImageResource(R.drawable.m7w27);
+			img_w4.setImageResource(R.drawable.m7w28);
+			break;
+		case 8:
+			img_w1.setImageResource(R.drawable.m8w29);
+			img_w2.setImageResource(R.drawable.m8w30);
+			img_w3.setImageResource(R.drawable.m8w31);
+			img_w4.setImageResource(R.drawable.m8w32);
+			break;
+		case 9:
+			img_w1.setImageResource(R.drawable.m9w33);
+			img_w2.setImageResource(R.drawable.m9w34);
+			img_w3.setImageResource(R.drawable.m9w35);
+			img_w4.setImageResource(R.drawable.m9w36);
+			break;
+		case 10:
+			img_w1.setImageResource(R.drawable.m10w37);
+			img_w2.setImageResource(R.drawable.m10w38);
+			img_w3.setImageResource(R.drawable.m10w39);
+			img_w4.setImageResource(R.drawable.m10w40);
+			break;
+		}
 	}
 
 	@Override
