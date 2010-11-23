@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.Map;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.TabActivity;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,7 +38,6 @@ import com.pure.gestationweek.util.Utils;
 
 public class GestationWeek extends TabActivity {
 	public final static String GESTATION_WEEK_CONFIG = "gestation_week_config";
-	private static final String TAB_4 = "tab_4";
 	private static final String TAB_3 = "tab_3";
 	private static final String TAB_2 = "tab_2";
 	private static final String TAB_1 = "tab_1";
@@ -55,6 +56,7 @@ public class GestationWeek extends TabActivity {
 	private TextView tv_mama_now_month;
 	private TextView tv_mama_ycq;
 	private TextView tv_mama_djs;
+	private TextView tv_mama_bmi;
 	private Button btn_view_up;
 	private Button btn_view_down;
 	private Button btn_new_diary;
@@ -94,10 +96,9 @@ public class GestationWeek extends TabActivity {
 		mTabHost = getTabHost();
 		Resources res = getResources();
 		LayoutInflater.from(this).inflate(R.layout.gestation_week, mTabHost.getTabContentView(), true);
-		mTabHost.addTab(mTabHost.newTabSpec(TAB_1).setIndicator(getString(R.string.tab_1_name), res.getDrawable(R.drawable.heat)).setContent(R.id.tab1_content));
-		mTabHost.addTab(mTabHost.newTabSpec(TAB_2).setIndicator(getString(R.string.tab_2_name)).setContent(R.id.tab2_content));
-		mTabHost.addTab(mTabHost.newTabSpec(TAB_3).setIndicator(getString(R.string.tab_3_name)).setContent(R.id.tab3_content));
-		mTabHost.addTab(mTabHost.newTabSpec(TAB_4).setIndicator(getString(R.string.tab_4_name)).setContent(R.id.tab4_content));
+		mTabHost.addTab(mTabHost.newTabSpec(TAB_1).setIndicator(getString(R.string.tab_1_name), res.getDrawable(R.drawable.ic_tab_01)).setContent(R.id.tab1_content));
+		mTabHost.addTab(mTabHost.newTabSpec(TAB_2).setIndicator(getString(R.string.tab_2_name), res.getDrawable(R.drawable.ic_tab_02)).setContent(R.id.tab2_content));
+		mTabHost.addTab(mTabHost.newTabSpec(TAB_3).setIndicator(getString(R.string.tab_3_name), res.getDrawable(R.drawable.ic_tab_03)).setContent(R.id.tab3_content));
 		mTabHost.setOnTabChangedListener(new OnTabChangeListener() {
 			@Override
 			public void onTabChanged(String tabTag) {
@@ -125,6 +126,7 @@ public class GestationWeek extends TabActivity {
 		btn_view_down = (Button) findViewById(R.id.btn_view_down);
 		btn_new_diary = (Button) findViewById(R.id.btn_new_diary);
 		btn_clean_diary = (Button) findViewById(R.id.btn_clean_diary);
+		tv_mama_bmi = (TextView) findViewById(R.id.tv_mama_bmi);
 
 		Calendar now = Calendar.getInstance();
 		String today = String.format("%s %s", Utils.formatDate(new Date(), getString(R.string.date_format)), getResources().getStringArray(R.array.weeks)[now.get(Calendar.DAY_OF_WEEK) - 1]);
@@ -212,7 +214,6 @@ public class GestationWeek extends TabActivity {
 	private void setViewDescn(int view) {
 		tv_descn_title.setText(getString(R.string.view_month_title, view));
 		tv_descn_content.setText(getResources().getStringArray(R.array.month_descns)[view - 1]);
-
 		img_w1 = (ImageView) findViewById(R.id.img_w1);
 		img_w2 = (ImageView) findViewById(R.id.img_w2);
 		img_w3 = (ImageView) findViewById(R.id.img_w3);
@@ -336,6 +337,28 @@ public class GestationWeek extends TabActivity {
 		int calcType = gestationWeekConfig.getInt(GestationWeekConfig.CALC_TYPE, 0);
 		long mcLong = gestationWeekConfig.getLong(GestationWeekConfig.MAMA_MC, System.currentTimeMillis());
 
+		String ch = gestationWeekConfig.getString(GestationWeekConfig.MAMA_HEIGHT, "");
+		String cw = gestationWeekConfig.getString(GestationWeekConfig.MAMA_WEIGHT, "");
+		float chf = 0f;
+		float cwf = 0f;
+		if (ch != null && ch.length() > 0) {
+			boolean ret = Utils.validateHeight(ch);
+			if (ret) {
+				chf = Float.parseFloat(ch);
+			}
+		}
+
+		if (cw != null && cw.length() > 0) {
+			boolean ret = Utils.validateWeight(cw);
+			if (ret) {
+				cwf = Float.parseFloat(cw);
+			}
+		}
+
+		if (chf > 0 && cwf > 0) {
+			tv_mama_bmi.setText(Utils.formatNum(cwf / (chf * chf)) + "");
+		}
+
 		Map<String, Integer> gestationWeek = Utils.getGestationWeek(calcType, mcLong);
 		tv_mama_week.setText(getWeekDayDescn(gestationWeek.get(Utils.GESTATION_WEEK_DAYS)));
 
@@ -370,6 +393,33 @@ public class GestationWeek extends TabActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		dbHelper.close();
+	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog result = null;
+		Builder builder;
+
+		switch (id) {
+		case MENU_HELP:
+			builder = new AlertDialog.Builder(this);
+			builder.setTitle(getString(R.string.app_name) + getString(R.string.menu_item_help));
+			builder.setMessage(getString(R.string.app_help));
+			builder.setPositiveButton(getString(R.string.bt_ok), null);
+			result = builder.create();
+			break;
+		case MENU_ABOUT:
+			builder = new AlertDialog.Builder(this);
+			builder.setTitle(getString(R.string.app_name) + " " + getString(R.string.app_version));
+			builder.setMessage(getString(R.string.app_about));
+			builder.setPositiveButton(getString(R.string.bt_ok), null);
+			result = builder.create();
+			break;
+		default:
+			result = super.onCreateDialog(id);
+			break;
+		}
+		return result;
 	}
 
 }

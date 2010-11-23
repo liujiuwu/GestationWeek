@@ -10,7 +10,6 @@
 	<string name="tab_1_name">孕宝</string>
 	<string name="tab_2_name">变化</string>
 	<string name="tab_3_name">孕记</string>
-	<string name="tab_4_name">知识</string>
 	<string name="btn_up_month">上一月</string>
 	<string name="btn_down_month">下一月</string>
 	<string name="btn_up_week">上一周</string>
@@ -30,10 +29,23 @@
 	<string name="ok_btn">确定</string>
 	<string name="cancel_btn">取消</string>
 	<string name="mama_name">孕妈妈姓名：</string>
+	<string name="mama_height">身高(米为单位)：</string>
+	<string name="mama_weight">孕前体重(千克为单位)：</string>
 	<string name="mama_mc">未次月经第一天：</string>
 	<string name="mama_calcType">计算方式：</string>
 	<string name="baby_name">宝宝姓名：</string>
+	<string name="config_descn">以下配置数值用于计算BMI(体重指标)</string>
+	<string name="dialog_error_title">信息提示</string>
+	<string name="error_message_01">请填写合法的身高数值，必须是两位小数，如1.68,1.70。</string>
+	<string name="error_message_02">请填写合法的体重数值，如60,58.5。</string>
+	<string name="bt_ok_01">确定</string>
+	<string name="bt_ok_02">取消</string>
 
 	<string name="widget_name">美孕宝</string>
 	<string name="gestation_week_tip">你的预产期在%s左右，恭喜你已怀孕%s，现处于%s，孕%s，剩余%s</string>
+	
+	<string name="bt_ok">确定</string>
+	<string name="app_version">1.0</string>
+	<string name="app_about">美孕宝版权所有\nEmail:liujiuwu(at)gmail.com\nQQ:923933533</string>
+	<string name="app_help">初次运行需要设置相关参数，本应用支持桌面Widget。</string>
 </resources>

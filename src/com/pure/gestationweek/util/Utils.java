@@ -1,5 +1,6 @@
 package com.pure.gestationweek.util;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -105,4 +106,25 @@ public abstract class Utils {
 		gestationWeek.put(GESTATION_WEEK_DJS_DAYS, days);
 		return gestationWeek;
 	}
+	
+
+	public static boolean validateHeight(String str) {// 判断小数，与判断整型的区别在与d后面的小数点（红色）
+		return str.matches("[1,2]{1}.[\\d]{2}");
+	}
+
+	public static boolean validateWeight(String str) {// 判断小数，与判断整型的区别在与d后面的小数点（红色）
+		return str.matches("^[1-9]{1}[\\d]{1,2}") ? true : str.matches("^[1-9]{1}[\\d]{1,2}.[\\d]{1}");
+	}
+	
+	
+	public static String formatNum(Float data) {
+		DecimalFormat def = new DecimalFormat("###.#");
+		return def.format(data);
+	}
+	
+	public static String formatNum(Double data) {
+		DecimalFormat def = new DecimalFormat("###.##");
+		return def.format(data);
+	}
+
 }
