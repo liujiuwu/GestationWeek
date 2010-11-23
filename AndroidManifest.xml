@@ -20,7 +20,7 @@
 			<meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_build" />
 		</receiver>
 
-		<meta-data android:value="244c61177c344f2f8239045678094c5c" android:name="Wooboo_PID" />
+		<meta-data android:value="1c4ef126dd444319ad76a8f939bed88d" android:name="Wooboo_PID" />
 		<meta-data android:value="1" android:name="Market_ID" />
 	</application>
 	<uses-sdk android:minSdkVersion="3" />
