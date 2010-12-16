@@ -56,7 +56,6 @@ public class GestationWeekWidget extends AppWidgetProvider {
 		refresh();
 	}
 
-	@Override
 	public void onReceive(Context context, Intent intent) {
 		setup(context);
 

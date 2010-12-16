@@ -42,7 +42,7 @@
 	<string name="bt_ok_02">取消</string>
 
 	<string name="widget_name">美孕宝</string>
-	<string name="gestation_week_tip">你的预产期在%s左右，恭喜你已怀孕%s，现处于%s，孕%s，剩余%s</string>
+	<string name="gestation_week_tip" formatted="false">你的预产期在%s左右，恭喜你已怀孕%s，现处于%s，孕%s，剩余%s</string>
 	
 	<string name="bt_ok">确定</string>
 	<string name="app_version">1.0</string>
