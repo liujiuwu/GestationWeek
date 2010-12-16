@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<declare-styleable name="com.wooboo.adlib_android.WoobooAdView">
-		<attr name="backgroundColor" format="color" /> <!-- 广告背景颜色 默认为黑色 -->
-		<attr name="textColor" format="color" /><!-- 广告文字颜色 默认为白色 -->
-		<attr name="testing" format="boolean" /><!-- 广告是否处于测试状态 为保证您的收益，请你在上传或者发布apk之前把该参数设置成false，默认为false -->
-		<attr name="refreshInterval" format="integer" /><!-- 广告请求时间间隔 -->
+	<declare-styleable name="net.youmi.android.AdView">
+		<attr name="backgroundColor" format="color" /><!--广告条的纯色背景色 -->
+		<attr name="textColor" format="color" />            <!--字体颜色 -->
+		<attr name="backgroundTransparent" format="integer" /> <!--背景透明度 -->
 	</declare-styleable>
-	
+
 	<string-array name="calc_types">
 		<item>按280天计算</item>
 		<item>加9个月零7天</item>
@@ -101,7 +100,8 @@
 			由于子宫逐渐向腹部扩张，使膀胱所受的压力减少，准妈妈的尿频症状也逐渐好转。在腹部开始出现妊娠纹。妊娠纹通常在腹部出现，有时也会波及乳房和大腿。由于肚子越来越大，准妈妈会愈来愈容易感到腰酸背痛。\n
 			3、特别关注健康问题——妊娠期糖尿病\n
 			症状：最明显的症状是三多一少即吃多、喝多、尿多，但体重减轻，空腹血糖升高，尿糖阳性，糖耐量减低，还伴有呕吐。\n
-			危害：妊娠期糖尿病(GDM)是孕期常见的一种并发症，如血糖控制不良，有可能导致严重的胎儿和母体近期和远期并发症和合并症，对胎儿的影响有可能出现死胎、出生后脑瘫、胎儿在母亲的子宫内缺氧、新生儿出生后低血糖、巨大儿等。除影响胎儿外，也给准妈妈们带来极大痛苦，妊娠期高血压疾病发生率比非糖尿病孕妇高4 倍、早产增多、泌尿系统感染以及阴道炎、羊水过多，甚至危及生命。\n
+			危害：妊娠期糖尿病(GDM)是孕期常见的一种并发症，如血糖控制不良，有可能导致严重的胎儿和母体近期和远期并发症和合并症，对胎儿的影响有可能出现死胎、出生后脑瘫、胎儿在母亲的子宫内缺氧、新生儿出生后低血糖、巨大儿等。除影响胎儿外，也给准妈妈们带来极大痛苦，妊娠期高血压疾病发生率比非糖尿病孕妇高4
+			倍、早产增多、泌尿系统感染以及阴道炎、羊水过多，甚至危及生命。\n
 			\n
 			注意事项：严控碳水化合物摄入，饮食方面更要兼顾血糖稳定、自身和胎儿营养需要，保证适当的运动，勤到医院检查，使血糖得到良好的控制。必要时用药物治疗。\n
 		</item>
@@ -151,7 +151,8 @@
 		<item>
 			孕10月——长征胜利啦(37至40周)\n
 			1、胎儿生长发育\n
-			现在胎儿身长可达48—50厘米，体重 3000克左右，皱纹已经消失，变成个淡红色的胖乎乎胎儿了。头盖骨变硬，指甲也长到超出手指尖，头发约有2—3厘米长，细毛几乎看不见了，胎脂在后背、屁股、关节等处已达稍许可以看见的程度。以心脏、肝脏为首的呼吸、消化、泌尿等器官已全部形成，做为一个人已经可以在母体外独立生活了。\n
+			现在胎儿身长可达48—50厘米，体重
+			3000克左右，皱纹已经消失，变成个淡红色的胖乎乎胎儿了。头盖骨变硬，指甲也长到超出手指尖，头发约有2—3厘米长，细毛几乎看不见了，胎脂在后背、屁股、关节等处已达稍许可以看见的程度。以心脏、肝脏为首的呼吸、消化、泌尿等器官已全部形成，做为一个人已经可以在母体外独立生活了。\n
 			2、准妈妈变化\n
 			胎儿位置下降，膀胱及大肠的压迫感却增强，频尿、便秘的情形更加严重，下肢也有难以行动的感觉。但是，腹部凸出部分会有稍减的感觉，同时胃及心脏的压迫感减轻，食欲也日渐恢复正常。怀孕10个月时，分娩准备已经成熟，子宫和阴道趋于软化，容易伸缩，分泌物增加，以方便胎儿通过产道。\n
 			3、特别关注健康问题——宫缩频繁\n
@@ -166,21 +167,27 @@
 
 	<string-array name="tips">
 		<item>See all your apps.\n
-			Touch the Launcher icon. @drawable/all_apps</item>
+			Touch the Launcher icon. @drawable/all_apps
+		</item>
 
 		<item>Drag apps to your Home screen.\n
-			Touch &amp; hold an app in the Launcher until it vibrates.</item>
+			Touch &amp; hold an app in the
+			Launcher until it vibrates.</item>
 
 		<item>Rearrange your Home screen.\n
-			Touch &amp; hold an item and when it vibrates, drag it where you want.</item>
+			Touch &amp; hold an item and when
+			it vibrates, drag it where you want.</item>
 
 		<item>Remove items.\n
-			Touch &amp; hold an item and when it vibrates, drag it to the Trash icon. @drawable/trash</item>
+			Touch &amp; hold an item and when it vibrates,
+			drag it to the Trash icon. @drawable/trash</item>
 
 		<item>Multiple Home screens.\n
-			Swipe left or right to switch. Drag items to other screens.</item>
+			Swipe left or right to switch. Drag
+			items to other screens.</item>
 
 		<item>Done with this widget?\n
-			Touch &amp; hold it and when it vibrates, drag it to the Trash icon.</item>
+			Touch &amp; hold it and when it
+			vibrates, drag it to the Trash icon.</item>
 	</string-array>
 </resources>

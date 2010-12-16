@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:adsdk="http://schemas.android.com/apk/res/com.pure.gestationweek" android:layout_width="fill_parent" android:layout_height="fill_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:umadsdk="http://schemas.android.com/apk/res/com.pure.gestationweek" android:layout_width="fill_parent" android:layout_height="fill_parent">
 	<LinearLayout android:id="@+id/tab1_content" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
 		<LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent">
 			<TableLayout android:layout_weight="1.0" android:id="@+id/TableLayout01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="5px">
@@ -39,7 +39,7 @@
 
 
 			<LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
-				<com.wooboo.adlib_android.WoobooAdView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" adsdk:testing="false" adsdk:backgroundColor="#00000000" adsdk:textColor="#FFFFFFFF" adsdk:refreshInterval="30" />
+				<net.youmi.android.AdView  android:id="@+id/adView"  android:layout_width="fill_parent"  android:layout_height="wrap_content"  umadsdk:textColor="#ffffff"  umadsdk:backgroundTransparent="155"  umadsdk:backgroundColor="#808080"/>
 			</LinearLayout>
 		</LinearLayout>
 		<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">

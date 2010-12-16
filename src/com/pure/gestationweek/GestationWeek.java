@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+import net.youmi.android.AdManager;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TabActivity;
@@ -79,6 +81,10 @@ public class GestationWeek extends TabActivity {
 
 	private GestationDiaryDbAdapter dbHelper;
 	private Cursor mDiaryCursor;
+
+	static {
+		AdManager.init("6e47d509fa77ac6c", "876d1a7da23e20de", 32, false, "2.1");
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -394,7 +400,7 @@ public class GestationWeek extends TabActivity {
 		super.onDestroy();
 		dbHelper.close();
 	}
-	
+
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		Dialog result = null;
