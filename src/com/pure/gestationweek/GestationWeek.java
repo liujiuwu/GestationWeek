@@ -4,12 +4,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-import net.youmi.android.AdManager;
-
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.TabActivity;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,14 +22,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
-import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.TabHost.OnTabChangeListener;
+import android.widget.TextView;
 
 import com.pure.gestationweek.util.DiaryListViewAdapter;
 import com.pure.gestationweek.util.GestationDiaryDbAdapter;
@@ -81,10 +79,6 @@ public class GestationWeek extends TabActivity {
 
 	private GestationDiaryDbAdapter dbHelper;
 	private Cursor mDiaryCursor;
-
-	static {
-		AdManager.init("6e47d509fa77ac6c", "876d1a7da23e20de", 32, false, "2.1");
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
