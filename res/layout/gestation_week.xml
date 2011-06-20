@@ -36,10 +36,8 @@
 				</TableRow>
 			</TableLayout>
 
-
-
 			<LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
-				<com.wooboo.adlib_android.WoobooAdView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" adsdk:testing="false" adsdk:backgroundColor="#00000000" adsdk:textColor="#FFFFFFFF" adsdk:refreshInterval="30" />
+				<com.wooboo.adlib_android.WoobooAdView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" adsdk:testing="false" adsdk:backgroundColor="#FFFFFFFF" adsdk:textColor="#00000000" adsdk:refreshInterval="45" />
 			</LinearLayout>
 		</LinearLayout>
 		<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
