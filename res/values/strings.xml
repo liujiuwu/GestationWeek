@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 	<string name="hello">Hello World, GestationWeek!</string>
-	<string name="app_name">美孕宝</string>
+	<string name="app_name">好孕宝</string>
 	<string name="date_format">yyyy年MM月dd日</string>
 	<string name="menu_item_config">设置</string>
 	<string name="menu_item_help">帮助</string>
