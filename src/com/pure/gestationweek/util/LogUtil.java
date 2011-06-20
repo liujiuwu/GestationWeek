@@ -26,4 +26,13 @@ public class LogUtil {
 			}
 		}
 	}
+
+	public static boolean isLogOff() {
+		return logOff;
+	}
+
+	public static void setLogOff(boolean logOff) {
+		LogUtil.logOff = logOff;
+	}
+
 }
