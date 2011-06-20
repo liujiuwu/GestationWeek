@@ -45,7 +45,7 @@
 	<string name="gestation_week_tip" formatted="false">你的预产期在%s左右，恭喜你已怀孕%s，现处于%s，孕%s，剩余%s</string>
 	
 	<string name="bt_ok">确定</string>
-	<string name="app_version">1.0</string>
+	<string name="app_version">2.0</string>
 	<string name="app_about">美孕宝版权所有\nEmail:liujiuwu(at)gmail.com\nQQ:923933533</string>
 	<string name="app_help">初次运行需要设置相关参数，本应用支持桌面Widget。</string>
 </resources>
